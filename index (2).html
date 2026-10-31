@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escala de Coroinhas — Novembro de 2026</title>
+<style>
+
+:root{--azul-mariano:#7a1f2b;--azul-mariano-2:#a5303f;--azul-claro:#faeee2;--dourado:#c9a24b;--dourado-claro:#f1e2b8;--branco:#fff;--texto:#1f2937;--texto-suave:#5b6472;--sombra:0 10px 30px rgba(122,31,43,0.12);--radius:18px;--bg-grad:linear-gradient(160deg,#fdf6ec 0%,#f7e8d8 45%,#fdf1e0 100%);--card-bg:#fff;--header-grad:linear-gradient(120deg,#4a0f18 0%,#7a1f2b 55%,#a5303f 100%);}
+[data-theme="dark"]{--azul-mariano:#e8a7ac;--azul-mariano-2:#c97b83;--azul-claro:#2b1c17;--dourado:#e0c26e;--dourado-claro:#3a3320;--branco:#1c1210;--texto:#eef2ff;--texto-suave:#b7c0d4;--sombra:0 10px 30px rgba(0,0,0,0.45);--bg-grad:linear-gradient(160deg,#170d0a 0%,#1f1310 50%,#150c09 100%);--card-bg:#221512;--header-grad:linear-gradient(120deg,#2b0c10 0%,#4a0f18 55%,#6b1a26 100%);}
+*{box-sizing:border-box;}html,body{margin:0;padding:0;}
+body{font-family:'Georgia','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg-grad);color:var(--texto);min-height:100vh;transition:background .4s ease,color .4s ease;padding-bottom:60px;}
+.ornamento{position:fixed;opacity:.06;pointer-events:none;z-index:0;}
+[data-theme="dark"] .ornamento{opacity:.08;}
+.orn-1{top:-60px;right:-60px;width:260px;}.orn-2{bottom:-40px;left:-60px;width:220px;}
+header{position:relative;background:var(--header-grad);color:#fff;padding:52px 20px 90px;text-align:center;overflow:hidden;box-shadow:var(--sombra);}
+header::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 15% 20%,rgba(255,255,255,.08) 0,transparent 35%),radial-gradient(circle at 85% 75%,rgba(255,255,255,.07) 0,transparent 40%);}
+.estrela-topo{width:34px;height:34px;margin:0 auto 14px;opacity:.95;}
+header h1{margin:0 0 6px;font-size:clamp(1.6rem,4vw,2.4rem);letter-spacing:.5px;font-weight:600;position:relative;}
+header .subtitulo{font-size:1rem;color:var(--dourado-claro);letter-spacing:3px;text-transform:uppercase;margin-bottom:4px;position:relative;}
+header .versiculo{font-style:italic;color:rgba(255,255,255,.85);max-width:560px;margin:14px auto 0;font-size:.95rem;position:relative;}
+.linha-dourada{width:90px;height:3px;background:linear-gradient(90deg,transparent,var(--dourado),transparent);margin:18px auto 0;position:relative;}
+.painel-controles{max-width:980px;margin:-55px auto 30px;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--sombra);padding:22px 24px;position:relative;z-index:5;border:1px solid rgba(201,162,75,.25);}
+.linha-controles{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+.campo-busca{flex:1 1 240px;position:relative;}
+.campo-busca input{width:100%;padding:12px 16px 12px 42px;border-radius:999px;border:1.5px solid rgba(122,31,43,.18);background:var(--azul-claro);color:var(--texto);font-size:.95rem;outline:none;transition:border .25s,box-shadow .25s;}
+.campo-busca input:focus{border-color:var(--dourado);box-shadow:0 0 0 3px rgba(201,162,75,.2);}
+.campo-busca .icone-busca{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;opacity:.55;}
+select{padding:11px 14px;border-radius:999px;border:1.5px solid rgba(122,31,43,.18);background:var(--azul-claro);color:var(--texto);font-size:.9rem;cursor:pointer;outline:none;}
+.botoes-acao{display:flex;gap:10px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 16px;border-radius:999px;border:none;background:var(--azul-mariano);color:#fff;font-size:.85rem;cursor:pointer;transition:transform .2s,box-shadow .2s;font-weight:500;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(122,31,43,.25);}
+.btn.dourado{background:linear-gradient(120deg,var(--dourado),#b8933f);color:#3a2c05;}
+.btn.outline{background:transparent;border:1.5px solid var(--azul-mariano-2);color:var(--azul-mariano-2);}
+[data-theme="dark"] .btn.outline{color:var(--azul-mariano);border-color:var(--azul-mariano);}
+.contagem-resultados{text-align:center;color:var(--texto-suave);font-size:.85rem;margin-top:14px;letter-spacing:.3px;}
+main{max-width:980px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+.bloco-local{margin-bottom:46px;}
+.titulo-local{display:flex;align-items:center;gap:12px;margin:34px 0 20px;}
+.titulo-local h2{font-size:1.3rem;color:var(--azul-mariano);margin:0;font-weight:600;}
+.titulo-local .icone-igreja{width:26px;height:26px;flex-shrink:0;color:var(--dourado);}
+.titulo-local::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,rgba(201,162,75,.5),transparent);}
+.grade-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--sombra);padding:22px;border:1px solid rgba(201,162,75,.18);position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease;}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(122,31,43,.18);}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--azul-mariano),var(--dourado),var(--azul-mariano-2));}
+.card-data{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;}
+.card-data .dia-mes{font-size:1.6rem;font-weight:700;color:var(--azul-mariano);line-height:1;}
+.card-data .dia-semana{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--dourado);margin-top:4px;font-weight:600;}
+.selo-mes{font-size:.68rem;color:var(--texto-suave);background:var(--azul-claro);padding:4px 10px;border-radius:999px;white-space:nowrap;}
+.celebracao{font-size:.85rem;color:var(--texto-suave);font-style:italic;margin-bottom:14px;padding-bottom:12px;border-bottom:1px dashed rgba(201,162,75,.35);}
+.horario-item{margin-bottom:14px;}.horario-item:last-child{margin-bottom:0;}
+.horario-cabecalho{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.badge-hora{background:var(--azul-mariano);color:#fff;font-weight:700;font-size:.85rem;padding:5px 12px;border-radius:999px;letter-spacing:.4px;}
+.lista-servidores{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;}
+.lista-servidores li{display:flex;align-items:center;gap:9px;font-size:.88rem;padding:6px 10px;background:var(--azul-claro);border-radius:10px;}
+.avatar-inicial{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--dourado),var(--azul-mariano-2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;}
+.nome-servidor{font-weight:600;color:var(--texto);}
+.funcao-servidor{color:var(--texto-suave);font-size:.76rem;}
+.a-definir .avatar-inicial{background:#b0b8c4;}
+.a-definir .nome-servidor{color:var(--texto-suave);font-style:italic;font-weight:500;}
+.evento-especial{background:var(--dourado-claro);color:#6b5417;padding:10px 12px;border-radius:10px;font-size:.85rem;font-weight:600;text-align:center;}
+[data-theme="dark"] .evento-especial{color:#e9d48f;}
+.card.oculto{display:none;}
+.destaque{background:rgba(201,162,75,.35);border-radius:3px;padding:0 2px;}
+footer{text-align:center;padding:40px 20px 10px;color:var(--texto-suave);font-size:.8rem;}
+footer .frase{font-style:italic;color:var(--azul-mariano-2);margin-bottom:8px;font-size:.9rem;}
+.toggle-tema{position:fixed;top:20px;right:20px;z-index:20;background:rgba(255,255,255,.15);border:1.5px solid rgba(255,255,255,.4);color:#fff;width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);}
+@media print{.toggle-tema,.painel-controles,header .versiculo,.estrela-topo,.ornamento{display:none!important;}body{background:#fff!important;}header{background:#7a1f2b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;padding:20px;}.card{box-shadow:none;border:1px solid #ccc;break-inside:avoid;}.grade-cards{grid-template-columns:repeat(2,1fr);}main{max-width:100%;}}
+@media (max-width:560px){header{padding:40px 16px 80px;}.linha-controles{flex-direction:column;align-items:stretch;}.grade-cards{grid-template-columns:1fr;}}
+
+</style>
+</head>
+<body data-theme="light">
+<svg class="ornamento orn-1" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 5 L54 40 L90 44 L54 48 L50 90 L46 48 L10 44 L46 40 Z" fill="#c9a24b"/></svg>
+<svg class="ornamento orn-2" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M50 10 C 30 10 15 25 15 45 C15 65 30 85 50 92 C70 85 85 65 85 45 C85 25 70 10 50 10 Z" fill="none" stroke="#7a1f2b" stroke-width="2"/><path d="M50 25 L50 65 M35 40 L65 40" stroke="#7a1f2b" stroke-width="2"/></svg>
+<button class="toggle-tema" id="btnTema" title="Alternar tema"><svg id="iconeTema" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-5.4-5.4c0-1.81.91-3.4 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg></button>
+<header>
+  <svg class="estrela-topo" viewBox="0 0 24 24" fill="#f1e2b8" xmlns="http://www.w3.org/2000/svg"><path d="M12 2 L14.5 8.5 L21 9.3 L16 13.7 L17.5 20.3 L12 16.8 L6.5 20.3 L8 13.7 L3 9.3 L9.5 8.5 Z"/></svg>
+  <div class="subtitulo">Sob a proteção de São Tarcísio</div>
+  <h1>Escala de Coroinhas</h1>
+  <div class="subtitulo" style="font-size:1.4rem; letter-spacing:1px; text-transform:none; color:#fff; font-weight:300;">Novembro de 2026</div>
+  <div class="linha-dourada"></div>
+  <p class="versiculo">&quot;São Tarcísio, ensina-nos a amar e servir Jesus com coragem.&quot; </p>
+</header>
+<div class="painel-controles">
+  <div class="linha-controles">
+    <div class="campo-busca">
+      <svg class="icone-busca" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="busca" placeholder="Pesquisar por nome do coroinha...">
+    </div>
+    <select id="filtroLocal"><option value="todos">Todas as igrejas</option></select>
+    <select id="filtroDia"><option value="todos">Todos os dias</option></select>
+    <select id="filtroHorario"><option value="todos">Todos os horários</option></select>
+  </div>
+  <div class="linha-controles" style="margin-top:14px;">
+    <div class="botoes-acao"><button class="btn outline" id="btnLimpar">Limpar filtros</button></div>
+    <div class="botoes-acao" style="margin-left:auto;">
+      <button class="btn" id="btnImprimir">🖨️ Imprimir</button>
+      <button class="btn dourado" id="btnPdf">⬇️ Exportar PDF</button>
+    </div>
+  </div>
+  <div class="contagem-resultados" id="contagem"></div>
+</div>
+<main id="conteudo"></main>
+<footer>
+  <p class="frase">São Tarcísio, mártir da Eucaristia, rogai por nós, coroinhas!</p>
+  <p>Escala de Coroinhas — Novembro de 2026</p>
+</footer>
+<script>
+const DADOS_LOCAIS = [{"nome":"Santuário de Nossa Senhora Aparecida","eventos":[{"data":"2026-11-01","celebracao":"Todos os Santos, Solenidade","horarios":[{"hora":"08:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Maria Cecilia"},{"funcao":"Tocha","nome":"Sarah"},{"funcao":"Tocha","nome":"Emanuely"},{"funcao":"Cruz","nome":"Thiago "}]},{"hora":"10:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Helena"},{"funcao":"Tocha","nome":"Isabelly"},{"funcao":"Cruz","nome":"Maria Clara B."},{"funcao":"Tocha","nome":"Maria Antônia"},{"funcao":"Coroinha","nome":"Miguel M."}]},{"hora":"18:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Tocha","nome":"Miguel G."},{"funcao":"Credência","nome":"Vitória"},{"funcao":"Tocha","nome":"Pietro"},{"funcao":"Cruz","nome":"Mabi"}]}]},{"data":"2026-11-04","celebracao":"Novena perpétua de N. Senhora Aparecida","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Maju"},{"funcao":"Coroinha","nome":"Lorena A."},{"funcao":"Coroinha","nome":"Miguel G."},{"funcao":"Coroinha","nome":"Amanda"}]}]},{"data":"2026-11-07","celebracao":"Sábado - 32ª Semana do Tempo Comum","horarios":[{"hora":"19:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Tocha","nome":"Gabriel José"},{"funcao":"Tocha","nome":"Heitor"},{"funcao":"Credência","nome":"Raphael"},{"funcao":"Cruz","nome":"Gabriel G."}]}]},{"data":"2026-11-08","celebracao":"32º Domingo do Tempo Comum","horarios":[{"hora":"08:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Valentina"},{"funcao":"Tocha","nome":"Maria Mel"},{"funcao":"Tocha","nome":"Yasmin G."},{"funcao":"Cruz","nome":"Maria Eduarda S."}]},{"hora":"10:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Davi"},{"funcao":"Tocha","nome":"Leopoldo"},{"funcao":"Tocha","nome":"Gabriel V."},{"funcao":"Cruz","nome":"Adriane"}]},{"hora":"18:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Joaquim"},{"funcao":"Tocha","nome":"Vitória"},{"funcao":"Tocha","nome":"Rayssa"},{"funcao":"Cruz","nome":"Mabily"}]}]},{"data":"2026-11-11","celebracao":"Novena perpétua de N. Senhora Aparecida","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Valentina"},{"funcao":"Coroinha","nome":"Maju"},{"funcao":"Coroinha","nome":"Lorena S."},{"funcao":"Coroinha","nome":"Miguel G."}]}]},{"data":"2026-11-14","celebracao":"Sábado - 33ª Semana do Tempo Comum","horarios":[{"hora":"19:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Lorenzo"},{"funcao":"Tocha","nome":"Thayna"},{"funcao":"Cruz","nome":"Leopoldo"},{"funcao":"Tocha","nome":"Bia"}]}]},{"data":"2026-11-15","celebracao":"33º Domingo do Tempo Comum","horarios":[{"hora":"08:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Allana"},{"funcao":"Tocha","nome":"Sophia"},{"funcao":"Cruz","nome":"Isaac"},{"funcao":"Tocha","nome":"Ricardinho"}]},{"hora":"10:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Davi"},{"funcao":"Tocha","nome":"Lorenzo"},{"funcao":"Cruz","nome":"Yasmin S."},{"funcao":"Tocha","nome":"Emanuelle"}]},{"hora":"18:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Leticia"},{"funcao":"Tocha","nome":"Helena"},{"funcao":"Tocha","nome":"Rayssa"},{"funcao":"Cruz","nome":"Amanda"}]}]},{"data":"2026-11-18","celebracao":"Novena perpétua de N. Senhora Aparecida","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Lorena Alves "},{"funcao":"Coroinha","nome":"Maju"},{"funcao":"Coroinha","nome":"Emanuely"},{"funcao":"Coroinha","nome":"Pietro"}]}]},{"data":"2026-11-21","celebracao":"Sábado - 34ª Semana do Tempo Comum","horarios":[{"hora":"19:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Leonardo"},{"funcao":"Tocha","nome":"Thayna"},{"funcao":"Cruz","nome":"Ana Luiza"},{"funcao":"Tocha","nome":"Emanuelle"}]}]},{"data":"2026-11-22","celebracao":"Nosso Senhor Jesus Cristo, Rei do Universo, Solenidade","horarios":[{"hora":"08:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Maria Cecília"},{"funcao":"Coroinha","nome":"Maria Clara F."},{"funcao":"Tocha","nome":"Ricardinho"},{"funcao":"Cruz","nome":"Lorena Sanches"},{"funcao":"Tocha","nome":"Thiago"}]},{"hora":"10:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Tocha","nome":"Felipe"},{"funcao":"Credência","nome":"Isabelly"},{"funcao":"Tocha","nome":"Isaac"},{"funcao":"Cruz","nome":"Mabi"}]},{"hora":"18:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Vitória"},{"funcao":"Tocha","nome":"Joaquim"},{"funcao":"Tocha","nome":"João Vitor"},{"funcao":"Cruz","nome":"Adriane"}]}]},{"data":"2026-11-25","celebracao":"Novena perpétua de N. Senhora Aparecida","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Lorena Alves"},{"funcao":"Coroinha","nome":"Valentina"},{"funcao":"Coroinha","nome":"Yasmin G."},{"funcao":"Coroinha","nome":"Lorena S."}]}]},{"data":"2026-11-28","celebracao":"Sábado - início do Advento","horarios":[{"hora":"18:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Tocha","nome":"Gabriel José"},{"funcao":"Tocha","nome":"Raphael"},{"funcao":"Cruz","nome":"Maria Clara B."},{"funcao":"Credência","nome":"Mabily"}]}]},{"data":"2026-11-29","celebracao":"1º Domingo do Advento","horarios":[{"hora":"08:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Cerimoniário","nome":"Maria Mel"},{"funcao":"Acólito","nome":"Leonardo"},{"funcao":"Acólito","nome":"Bia"},{"funcao":"Acólito","nome":"Pietro"},{"funcao":"Naveta","nome":"Felipe"}]},{"hora":"10:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Juliana"},{"funcao":"Tocha","nome":"Cecília"},{"funcao":"Cruz","nome":"Gabriel V."},{"funcao":"Naveta","nome":"Yasmin S."},{"funcao":"Tocha","nome":"Maria Antônia"}]},{"hora":"18:00","especial":false,"especialTexto":"","servidores":[{"funcao":"Credência","nome":"Sarah"},{"funcao":"Naveta","nome":"Maria Clara F."},{"funcao":"Cruz","nome":"Ana Luiza"},{"funcao":"Tocha","nome":"Gabriel G."},{"funcao":"Tocha","nome":"João Vitor"}]}]}]},{"nome":"Capela do Cruzeiro Santa Luzia","eventos":[{"data":"2026-11-01","celebracao":"Todos os Santos, Solenidade","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Igor"},{"funcao":"Coroinha","nome":"Leticia"}]}]},{"data":"2026-11-08","celebracao":"32º Domingo do Tempo Comum","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Helena"},{"funcao":"Coroinha","nome":"Giulia"}]}]},{"data":"2026-11-15","celebracao":"33º Domingo do Tempo Comum","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Joaquim"},{"funcao":"Coroinha","nome":"Emanuely"}]}]},{"data":"2026-11-22","celebracao":"Nosso Senhor Jesus Cristo, Rei do Universo, Solenidade","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Coroinha","nome":"Giulia"},{"funcao":"Coroinha","nome":"Maria Clara F."}]}]},{"data":"2026-11-29","celebracao":"1º Domingo do Advento","horarios":[{"hora":"19:30","especial":false,"especialTexto":"","servidores":[{"funcao":"Naveta","nome":"Luisa"},{"funcao":"Coroinha","nome":"Igor"},{"funcao":"Coroinha","nome":"Giulia"}]}]}]}];
+
+const DIAS_SEMANA = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const MESES_ABREV = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+function diaSemanaDe(iso){ const d = new Date(iso+'T00:00:00'); return DIAS_SEMANA[d.getDay()]; }
+function mesAbrevDe(iso){ const d = new Date(iso+'T00:00:00'); return MESES_ABREV[d.getMonth()]; }
+function diaNumeroDe(iso){ const d = new Date(iso+'T00:00:00'); return d.getDate(); }
+function iniciais(nome){ if(!nome || nome.includes('DEFINIR')) return '?'; const p = nome.trim().split(/\s+/).filter(Boolean); if(p.length===0) return '?'; if(p.length===1) return (p[0].substring(0,2)||'?').toUpperCase(); const pr = p[0].charAt(0)||''; const ul = p[p.length-1].charAt(0)||''; return (pr+ul).toUpperCase() || '?'; }
+function escapeHtml(s){ return (s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function destacarTexto(texto, termo){ const seguro = escapeHtml(texto); if(!termo) return seguro; const regex = new RegExp('('+termo.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'); return seguro.replace(regex, '<span class="destaque">$1</span>'); }
+const ICONE_IGREJA = '<svg class="icone-igreja" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 L12 6"/><path d="M9 4 L15 4"/><path d="M4 21 L4 11 L12 6 L20 11 L20 21 Z"/><path d="M9 21 L9 15 L15 15 L15 21"/><circle cx="12" cy="10.5" r="1.2" fill="currentColor" stroke="none"/></svg>';
+function renderizarServidor(s, termo){ const definir = (s.nome||'').includes('DEFINIR') || !s.nome; const nomeShow = definir ? 'A definir' : s.nome; return '<li class="'+(definir?'a-definir':'')+'"><span class="avatar-inicial">'+iniciais(s.nome)+'</span><span><span class="nome-servidor">'+destacarTexto(nomeShow, termo)+'</span><span class="funcao-servidor"> · '+escapeHtml(s.funcao||'')+'</span></span></li>'; }
+function renderizarCard(local, evento, termo){
+  const dia = diaNumeroDe(evento.data), diaSemana = diaSemanaDe(evento.data), mesAbrev = mesAbrevDe(evento.data);
+  const horariosHtml = evento.horarios.map(h => {
+    if(h.especial){ return '<div class="horario-item"><div class="horario-cabecalho"><span class="badge-hora">'+(h.hora||'--:--')+'</span></div><div class="evento-especial">✦ '+escapeHtml(h.especialTexto||'Evento especial')+'</div></div>'; }
+    const sv = h.servidores.map(s => renderizarServidor(s, termo)).join('');
+    return '<div class="horario-item"><div class="horario-cabecalho"><span class="badge-hora">'+(h.hora||'--:--')+'</span></div><ul class="lista-servidores">'+sv+'</ul></div>';
+  }).join('');
+  const celeb = evento.celebracao ? '<div class="celebracao">'+escapeHtml(evento.celebracao)+'</div>' : '';
+  const nomesBusca = evento.horarios.flatMap(h => (h.servidores||[]).map(s=>s.nome||'')).join(', ').toLowerCase();
+  const horas = evento.horarios.map(h => h.hora).join('|');
+  return '<div class="card" data-local="'+escapeHtml(local.nome)+'" data-dia="'+diaSemana+'" data-horas="'+horas+'" data-nomes="'+escapeHtml(nomesBusca)+'"><div class="card-data"><div><span class="dia-mes">'+dia+'</span><span class="dia-semana">'+(diaSemana||'—')+'</span></div><span class="selo-mes">'+mesAbrev+'</span></div>'+celeb+horariosHtml+'</div>';
+}
+function renderizarTudo(){
+  const container = document.getElementById('conteudo');
+  container.innerHTML = DADOS_LOCAIS.map(local => {
+    if(!local.eventos || local.eventos.length===0) return '';
+    return '<section class="bloco-local"><div class="titulo-local">'+ICONE_IGREJA+'<h2>'+escapeHtml(local.nome)+'</h2></div><div class="grade-cards">'+local.eventos.map(e => renderizarCard(local, e, '')).join('')+'</div></section>';
+  }).join('');
+}
+function popularFiltros(){
+  const selLocal = document.getElementById('filtroLocal');
+  DADOS_LOCAIS.forEach(l => { const opt = document.createElement('option'); opt.value = l.nome; opt.textContent = l.nome; selLocal.appendChild(opt); });
+  const dias = [...new Set(DADOS_LOCAIS.flatMap(l => l.eventos.map(e => diaSemanaDe(e.data))))];
+  const selDia = document.getElementById('filtroDia');
+  dias.forEach(d => { const opt = document.createElement('option'); opt.value = d; opt.textContent = d; selDia.appendChild(opt); });
+  const horarios = [...new Set(DADOS_LOCAIS.flatMap(l => l.eventos.flatMap(e => e.horarios.map(h => h.hora))))].sort();
+  const selHora = document.getElementById('filtroHorario');
+  horarios.forEach(h => { const opt = document.createElement('option'); opt.value = h; opt.textContent = h; selHora.appendChild(opt); });
+}
+function aplicarFiltros(){
+  const termo = document.getElementById('busca').value.trim().toLowerCase();
+  const local = document.getElementById('filtroLocal').value;
+  const dia = document.getElementById('filtroDia').value;
+  const horario = document.getElementById('filtroHorario').value;
+  const cards = document.querySelectorAll('.card');
+  let visiveis = 0;
+  cards.forEach(card => {
+    const nomes = card.getAttribute('data-nomes')||'';
+    const horas = (card.getAttribute('data-horas')||'').split('|');
+    const mostrar = (!termo || nomes.includes(termo)) && (local==='todos'||card.getAttribute('data-local')===local) && (dia==='todos'||card.getAttribute('data-dia')===dia) && (horario==='todos'||horas.includes(horario));
+    card.classList.toggle('oculto', !mostrar);
+    if(mostrar) visiveis++;
+  });
+  document.querySelectorAll('.bloco-local').forEach(sec => { const tem = [...sec.querySelectorAll('.card')].some(c=>!c.classList.contains('oculto')); sec.style.display = tem?'':'none'; });
+  document.getElementById('contagem').textContent = visiveis===0 ? 'Nenhuma celebração encontrada com esses filtros.' : visiveis+' celebração(ões) encontrada(s)';
+  if(termo){ document.querySelectorAll('.card:not(.oculto) .nome-servidor').forEach(el=>{ el.innerHTML = destacarTexto(el.textContent, termo); }); }
+  else{ document.querySelectorAll('.card .nome-servidor').forEach(el=>{ el.textContent = el.textContent; }); }
+}
+const ICONE_SOL = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4.5a1 1 0 011 1V7a1 1 0 11-2 0V5.5a1 1 0 011-1zm0 12a3.5 3.5 0 100-7 3.5 3.5 0 000 7zm7.5-4.5a1 1 0 011 1 1 1 0 01-1 1H18a1 1 0 110-2h1.5zM6 13a1 1 0 011 1 1 1 0 01-1 1H4.5a1 1 0 110-2H6zm11.03-5.53a1 1 0 011.42 0 1 1 0 010 1.42l-.71.7a1 1 0 11-1.41-1.4l.7-.72zM6.66 17.24a1 1 0 011.41 0 1 1 0 010 1.42l-.7.7a1 1 0 11-1.42-1.41l.71-.71zM12 17.5a1 1 0 011 1V20a1 1 0 11-2 0v-1.5a1 1 0 011-1zm5.03 1.24a1 1 0 011.42 1.41l-.71.71a1 1 0 01-1.41-1.42l.7-.7zM6.66 6.76a1 1 0 01-1.41-1.42l.7-.7a1 1 0 111.42 1.4l-.71.72z"/></svg>';
+const ICONE_LUA = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 109 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 01-4.4 2.26 5.403 5.403 0 01-5.4-5.4c0-1.81.91-3.4 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>';
+document.getElementById('btnTema').addEventListener('click', () => {
+  const body = document.body; const novo = body.getAttribute('data-theme')==='light'?'dark':'light';
+  body.setAttribute('data-theme', novo);
+  document.getElementById('iconeTema').outerHTML = (novo==='dark'?ICONE_SOL:ICONE_LUA).replace('<svg ', '<svg id="iconeTema" ');
+});
+document.getElementById('busca').addEventListener('input', aplicarFiltros);
+document.getElementById('filtroLocal').addEventListener('change', aplicarFiltros);
+document.getElementById('filtroDia').addEventListener('change', aplicarFiltros);
+document.getElementById('filtroHorario').addEventListener('change', aplicarFiltros);
+document.getElementById('btnLimpar').addEventListener('click', () => { document.getElementById('busca').value=''; document.getElementById('filtroLocal').value='todos'; document.getElementById('filtroDia').value='todos'; document.getElementById('filtroHorario').value='todos'; aplicarFiltros(); });
+document.getElementById('btnImprimir').addEventListener('click', () => window.print());
+document.getElementById('btnPdf').addEventListener('click', () => window.print());
+renderizarTudo(); popularFiltros(); aplicarFiltros();
+
+</script>
+</body>
+</html>
